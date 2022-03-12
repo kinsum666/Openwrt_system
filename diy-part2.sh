@@ -12,6 +12,45 @@
 # 修改openwrt登陆地址,把下面的192.168.2.2修改成你想要的就可以了
 sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_generate
 
+
+# 编译者信息
+cat >> R7800.config <<EOF
+CONFIG_KERNEL_BUILD_USER="Kinsum"
+CONFIG_KERNEL_BUILD_DOMAIN="GitHub Actions @ Kinsum"
+EOF
+
+# 固件压缩:
+# cat >> R7800.config <<EOF
+# CONFIG_TARGET_IMAGES_GZIP=y
+# EOF
+
+
+# 修改主机名字，把OpenWrt-123修改你喜欢的就行（不能纯数字或者使用中文）
+sed -i '/uci commit system/i\uci set system.@system[0].hostname='Kinsum'' package/lean/default-settings/files/zzz-default-settings
+
+# 版本号里显示一个自己的名字（kinsum build $(TZ=UTC-8 date "+%Y.%m.%d") @ 这些都是后增加的）
+sed -i "s/OpenWrt /kinsum Build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" package/lean/default-settings/files/zzz-default-settings
+
+
+# 设置密码为空（安装固件时无需密码登陆，然后自己修改想要的密码）
+# sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' package/lean/default-settings/files/zzz-default-settings
+
+# 添加温度显示(By YYiiEt)
+sed -i 's/or "1"%>/or "1"%> ( <%=luci.sys.exec("expr `cat \/sys\/class\/thermal\/thermal_zone0\/temp` \/ 1000") or "?"%> \&#8451; ) /g' feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
+
+# WIFI名为MAC后六位
+# rm -rf package/kernel/mac80211/files/lib/wifi/mac80211.sh
+# cp -f ../mac80211.sh package/kernel/mac80211/files/lib/wifi/
+
+# 替换banner
+# rm -rf package/base-files/files/etc/banner
+# cp -f ../banner package/base-files/files/etc/
+
+
+# 修改内核版本
+#sed -i 's/PATCHVER:=5.4/PATCHVER:=4.19/g' target/linux/x86/Makefile
+
+
 #sirpdboy
 #git clone https://github.com/sirpdboy/sirpdboy-package.git package/sirpdboy-package
 git clone https://github.com/sirpdboy/luci-theme-opentopd.git package/luci-theme-opentopd
@@ -41,40 +80,12 @@ git clone https://github.com/vernesong/OpenClash.git package/OpenClash
 git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
 git clone https://github.com/zzsj0928/luci-app-pushbot.git package/luci-app-pushbot
 git clone https://github.com/riverscn/openwrt-iptvhelper.git package/openwrt-iptvhelper
-git clone https://github.com/garypang13/luci-app-eqos package/luci-app-eqos  #内网IP限速工具
 git clone https://github.com/jerrykuku/node-request.git package/node-request  #京东签到依赖
-git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git package/luci-app-jd-dailybonus  #luci-app-jd-dailybonus[京东签到]
-
-
-#passwall出国软件
-svn co https://github.com/xiaorouji/openwrt-package/trunk/lienol/luci-app-passwall package/luci-app-passwall
-svn co https://github.com/xiaorouji/openwrt-package/trunk/package/brook package/brook
-svn co https://github.com/xiaorouji/openwrt-package/trunk/package/chinadns-ng package/chinadns-ng
-svn co https://github.com/xiaorouji/openwrt-package/trunk/package/tcping package/tcping
-svn co https://github.com/xiaorouji/openwrt-package/trunk/package/trojan-go package/trojan-go
-svn co https://github.com/xiaorouji/openwrt-package/trunk/package/trojan-plus package/trojan-plus
-svn co https://github.com/xiaorouji/openwrt-package/trunk/package/syncthing package/syncthing
-
-
+git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git package/luci-app-jd-dailybonus
 
 #添加smartdns
 git clone https://github.com/pymumu/openwrt-smartdns package/smartdns
 git clone -b lede https://github.com/pymumu/luci-app-smartdns.git package/luci-app-smartdns
-
-
-# 修改主机名字，把OpenWrt-123修改你喜欢的就行（不能纯数字或者使用中文）
-sed -i '/uci commit system/i\uci set system.@system[0].hostname='Kinsum'' package/lean/default-settings/files/zzz-default-settings
-
-# 版本号里显示一个自己的名字（kinsum build $(TZ=UTC-8 date "+%Y.%m.%d") @ 这些都是后增加的）
-sed -i "s/OpenWrt /Kinsum Build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" package/lean/default-settings/files/zzz-default-settings
-
-
-# 设置密码为空（安装固件时无需密码登陆，然后自己修改想要的密码）
-# sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' package/lean/default-settings/files/zzz-default-settings
-
-
-# 修改内核版本
-#sed -i 's/PATCHVER:=5.4/PATCHVER:=4.19/g' target/linux/x86/Makefile
 
 # 修改插件名字（修改名字后不知道会不会对插件功能有影响，自己多测试）
 sed -i 's/"BaiduPCS Web"/"百度网盘"/g' package/lean/luci-app-baidupcs-web/luasrc/controller/baidupcs-web.lua
@@ -92,6 +103,11 @@ sed -i 's/"网络存储"/"存储"/g' package/lean/luci-app-usb-printer/po/zh-cn/
 sed -i 's/"Web 管理"/"Web"/g' package/lean/luci-app-webadmin/po/zh-cn/webadmin.po
 sed -i 's/"管理权"/"改密码"/g' feeds/luci/modules/luci-base/po/zh-cn/base.po
 sed -i 's/"带宽监控"/"监视"/g' feeds/luci/applications/luci-app-nlbwmon/po/zh-cn/nlbwmon.po
-#sed -i 's/"带宽监控"/"监视"/g' feeds/luci/applications/luci-app-nlbwmon/po/zh-cn/nlbwmon.po
+# sed -i 's/"内网穿透"/"服务器"/g' feeds/luci/applications/luci-app-nlbwmon/po/zh-cn/nlbwmon.poluci-app-frpc is not set #Frp内网穿透
 
-#https://github.com/nxhack/openwrt-node-packages
+
+
+
+
+
+
