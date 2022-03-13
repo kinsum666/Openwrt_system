@@ -69,12 +69,12 @@ sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' packag
 sed -i 's/luci-theme-bootstrap/luci-theme-bootstrap/g' feeds/luci/collections/luci/Makefile
 
 #添加额外软件包
-# git clone https://github.com/rufengsuixing/luci-app-adguardhome.git package/luci-app-adguardhome
-# git clone https://github.com/vernesong/OpenClash.git package/OpenClash
-# git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
-# git clone https://github.com/zzsj0928/luci-app-pushbot.git package/luci-app-pushbot
-# git clone https://github.com/riverscn/openwrt-iptvhelper.git package/openwrt-iptvhelper
-# git clone https://github.com/xiaorouji/openwrt-passwall　package/passwall
+git clone https://github.com/rufengsuixing/luci-app-adguardhome.git package/luci-app-adguardhome
+git clone https://github.com/vernesong/OpenClash.git package/OpenClash
+git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
+git clone https://github.com/zzsj0928/luci-app-pushbot.git package/luci-app-pushbot
+git clone https://github.com/riverscn/openwrt-iptvhelper.git package/openwrt-iptvhelper
+git clone https://github.com/xiaorouji/openwrt-passwall　package/passwall
 git clone https://github.com/jerrykuku/node-request.git package/node-request  #京东签到依赖
 git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git package/luci-app-jd-dailybonus
 
