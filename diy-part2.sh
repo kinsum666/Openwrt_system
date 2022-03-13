@@ -28,7 +28,7 @@ EOF
 sed -i '/uci commit system/i\uci set system.@system[0].hostname='Kinsum'' package/lean/default-settings/files/zzz-default-settings
 
 # 版本号里显示一个自己的名字（kinsum build $(TZ=UTC-8 date "+%Y.%m.%d") @ 这些都是后增加的）
-sed -i "s/OpenWrt /kinsum Build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" package/lean/default-settings/files/zzz-default-settings
+sed -i "s/OpenWrt /Kinsum Build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" package/lean/default-settings/files/zzz-default-settings
 
 
 # 设置密码为空（安装固件时无需密码登陆，然后自己修改想要的密码）
@@ -72,7 +72,7 @@ sed -i 's/luci-theme-bootstrap/luci-theme-bootstrap/g' feeds/luci/collections/lu
 git clone https://github.com/rufengsuixing/luci-app-adguardhome.git package/luci-app-adguardhome
 git clone https://github.com/vernesong/OpenClash.git package/OpenClash
 git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
-git clone https://github.com/zzsj0928/luci-app-pushbot.git package/luci-app-pushbot
+# git clone https://github.com/zzsj0928/luci-app-pushbot.git package/luci-app-pushbot
 git clone https://github.com/riverscn/openwrt-iptvhelper.git package/openwrt-iptvhelper
 git clone https://github.com/xiaorouji/openwrt-passwall　package/passwall
 git clone https://github.com/jerrykuku/node-request.git package/node-request  #京东签到依赖
