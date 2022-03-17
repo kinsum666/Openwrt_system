@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build 4300-lite123
+name: Build 4300-lite12
 
 on:
   repository_dispatch:
