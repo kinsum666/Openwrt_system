@@ -13,10 +13,10 @@
 
 # Add a feed source
 
-# echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
-# echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
-# echo 'src-git kenzo https://github.com/kenzok8/openwrt-packages' >>feeds.conf.default
-# echo 'src-git small https://github.com/kenzok8/small' >>feeds.conf.default
+echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
+echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
+echo 'src-git kenzo https://github.com/kenzok8/openwrt-packages' >>feeds.conf.default
+echo 'src-git small https://github.com/kenzok8/small' >>feeds.conf.default
 # echo 'src-git routing https://git.openwrt.org/feed/routing.git^a7b79a1d4fce4f443854115ee4b2ed2aafba5c06
-# echo 'src-git OpenAppFilter https://github.com/destan19/OpenAppFilter' >>feeds.conf.default
-# echo 'src-git luci-app-easymesh https://github.com/kinsum666/luci-app-easymesh.git' >>feeds.conf.default
+echo 'src-git OpenAppFilter https://github.com/destan19/OpenAppFilter' >>feeds.conf.default
+
