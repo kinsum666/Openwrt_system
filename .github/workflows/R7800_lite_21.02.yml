@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: R7800_lite_21.02
+name: R7800_lite_21.02 with NSS
 
 on:
   repository_dispatch:
@@ -20,10 +20,11 @@ on:
         default: 'false'
 
 
+
 ################Build openwrt-21.02
 env:
-  REPO_URL: https://github.com/immortalwrt/immortalwrt
-  REPO_BRANCH: openwrt-21.02
+  REPO_URL: https://github.com/ACwifidude/openwrt
+  REPO_BRANCH: openwrt-21.02-nss-qsdk10.0
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: R7800lite.config
   DIY_P1_SH: diy-part1.sh
