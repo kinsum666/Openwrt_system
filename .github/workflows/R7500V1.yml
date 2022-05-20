@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name:Build R7500V1
+name: Build R7500V1
 on:
   repository_dispatch:
   workflow_dispatch:
